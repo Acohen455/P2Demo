@@ -14,11 +14,14 @@ export const Register:React.FC = () => {
             username:"reactUser",
             password:"password"
         })
+
         .then(() => {
             alert("User created!")
             //TODO: actually use the returned data
+
         })
 
+        console.log(response)
 
     }
 

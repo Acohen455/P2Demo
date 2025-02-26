@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import { useEffect, useRef, useState } from "react";
 import { Button, Container, Form } from "react-bootstrap"
 import { useNavigate } from "react-router-dom"
@@ -68,8 +68,8 @@ export const Login:React.FC = () => {
                 navigate("/games")
             }
 
-        } catch (error) {
-            alert(error.response.data)
+        } catch {
+            alert("Our biggest error is settling on bad practices... :(")
         }
 
     }
