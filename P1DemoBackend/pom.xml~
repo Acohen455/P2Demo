@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.revature</groupId>
-	<artifactId>P2DemoBackend</artifactId>
+	<artifactId>P1DemoBackend</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>P1DemoBackend</name>
 	<description>Demo for Project 1</description>
