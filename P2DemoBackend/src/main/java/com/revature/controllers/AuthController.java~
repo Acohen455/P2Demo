@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 //I like to put account registration and login functionality here
 @RestController //Combines @Controller and @ResponseBody (makes a class a bean, and lets us send JSON responses)
 @RequestMapping("/auth") //Requests ending in /auth will go to this Controller
-@CrossOrigin(value = {"http://localhost:5173", "http://myp2bucketbjp.s3-website-us-east-1.amazonaws.com/"}, allowCredentials = "true") //This annotation will allow requests from anywhere (like our React app)
+@CrossOrigin(value = "http://localhost:5173", allowCredentials = "true") //This annotation will allow requests from anywhere (like our React app)
 public class AuthController {
 
     //autowire the AuthService to use its methods
