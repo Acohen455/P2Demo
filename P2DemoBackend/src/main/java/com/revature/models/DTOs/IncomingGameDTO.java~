@@ -10,20 +10,18 @@ package com.revature.models.DTOs;
 
 //Side note: we'll also leave out gameId since the DB handles that
 
-import java.util.UUID;
-
 public class IncomingGameDTO {
 
     private String title;
     private String genre;
-    private UUID userId;
+    private int userId;
 
     //boilerplate------------------
 
     public IncomingGameDTO() {
     }
 
-    public IncomingGameDTO(String title, String genre, UUID userId) {
+    public IncomingGameDTO(String title, String genre, int userId) {
         this.title = title;
         this.genre = genre;
         this.userId = userId;
@@ -45,11 +43,11 @@ public class IncomingGameDTO {
         this.genre = genre;
     }
 
-    public UUID getUserId() {
+    public int getUserId() {
         return userId;
     }
 
-    public void setUserId(UUID userId) {
+    public void setUserId(int userId) {
         this.userId = userId;
     }
 
