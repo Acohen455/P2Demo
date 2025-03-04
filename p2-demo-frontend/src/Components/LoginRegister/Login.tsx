@@ -63,7 +63,7 @@ export const Login:React.FC = () => {
             //const response = await axios.post("http://3.133.155.102:8080/auth/login", loginCreds, {withCredentials:true})
 
             //LOCAL AXIOS REQUEST
-            const response = await axios.post("http://localhost:8081/auth/login",
+            const response = await axios.post("http://localhost:8080/auth/login",
                 loginCreds, {withCredentials:true})
             //withCredentials lets us interact with sessions on the backend
             //every request that depends on the user being logged in, being an admin, etc, needs this

@@ -74,7 +74,8 @@ export const Login:React.FC = () => {
 
             console.log(loggedInUser);
 
-            alert("Welcome " + loggedInUser?.username)
+            //the ? means if this exists print it out, otherwise null
+            alert("Welcome " + loggedInUser?.username);
 
 
 
