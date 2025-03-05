@@ -33,8 +33,7 @@ public class AuthService {
 
 
 
-        //PASSWORD ENCRYPTION----
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        
 
 
         //We use the save() method to insert data into the DB

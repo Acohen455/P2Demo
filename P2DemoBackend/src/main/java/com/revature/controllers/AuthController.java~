@@ -3,7 +3,6 @@ package com.revature.controllers;
 import com.revature.models.DTOs.LoginDTO;
 import com.revature.models.DTOs.OutgoingUserDTO;
 import com.revature.models.User;
-import com.revature.security.JwtTokenUtil;
 import com.revature.services.AuthService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,18 +23,11 @@ public class AuthController {
     private final AuthService authService;
 
     //we also need to autowire the JWTTokenUtil and the AuthManager
-    private final JwtTokenUtil jwtTokenUtil;
-    private final AuthenticationManager authenticationManager;
 
     @Autowired
-    public AuthController(AuthService authService, JwtTokenUtil jwtTokenUtil, AuthenticationManager authenticationManager) {
+    public AuthController(AuthService authService) {
         this.authService = authService;
-        this.jwtTokenUtil = jwtTokenUtil;
-        this.authenticationManager = authenticationManager;
     }
-
-
-
 
     //Insert a new user (POST request)
     @PostMapping("/register") //Requests ending in /auth/register will invoke this method
