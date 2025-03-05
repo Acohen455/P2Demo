@@ -17,7 +17,7 @@ spring.jpa.show-sql=true
 spring.jpa.properties.hibernate.default_schema=project2
 
 # Setting our DDL to "update", which will update the DB when changes happen our models
-spring.jpa.hibernate.ddl-auto=create
+spring.jpa.hibernate.ddl-auto=update
 # We could have set this to "create" which would drop and recreate each table on app run
 
 # This config allows us to see SQL statements running in the console
@@ -27,3 +27,7 @@ spring.jpa.hibernate.ddl-auto=create
 spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.PostgreSQLDialect
 
 # Your application.properties for P1 will look veryyy similar to this. steal away
+
+#we'll use this to sign and verify JWTs
+app.jwt.secret=fdsfjgh3i4yeh92dyu234234hj23ewruig23jihqrh327etq2837oudihq23aew87duafdsfjgh3i4yeh92dyu234234hj23ewruig23jihqrh327etq2837oudihq23aew87dua123rt182rui3ehwfjf32oru34fierhfdsfjgh3i4yeh92dyu234234hj23ewruig23jihqrh327etq2837oudihq23aew87dua
+ 
