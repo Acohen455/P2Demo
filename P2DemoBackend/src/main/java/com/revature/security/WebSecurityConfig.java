@@ -84,7 +84,8 @@ public class WebSecurityConfig {
                         auth.requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()  // Allow all OPTIONS requests (lets the CORS preflight request pass)
                                 .requestMatchers("/auth/**").permitAll()
                                 .requestMatchers(new AntPathRequestMatcher("/users/**")).hasAuthority("manager")
-                                .anyRequest().authenticated()
+                                .anyRequest().authenticated() //you could have seperate roles for different departments etc.
+                        //for right now, this says anyone with a JWT that doesnt have manager authority can access anything else
                 )
                 .sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .addFilterBefore(jwtTokenFilter, UsernamePasswordAuthenticationFilter.class)
