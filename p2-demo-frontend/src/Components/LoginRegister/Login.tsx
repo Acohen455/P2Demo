@@ -86,7 +86,8 @@ export const Login:React.FC = () => {
             alert(store.loggedInUser.username + " has logged in! Welcome.")
 
             //users will get sent to users component if they're an "admin", or the games component if they're a "user"
-            if(store.loggedInUser.role === "admin"){
+            // ? is a null check -- basically an optional
+            if(loggedInUser?.role === "admin"){
                 navigate("/users")
             } else {
                 navigate("/games")

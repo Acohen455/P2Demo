@@ -6,10 +6,13 @@
 //First we'll define a LoggedInUser interface to structure our data
 import {createContext, ReactNode, useContext, useEffect, useState} from "react";
 
+//make sure names match!
+//field on the backend is named jwt, so name has to match here
 interface LoggedInUser{
     userId:string;
     username:string;
     role:string;
+    jwt:string;
 }
 
 //Define an AuthContextType interface to define initial state and a mutator for user data
