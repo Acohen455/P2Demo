@@ -3,8 +3,10 @@ package com.revature.controllers;
 import com.revature.models.DTOs.LoginDTO;
 import com.revature.models.DTOs.OutgoingUserDTO;
 import com.revature.models.User;
+import com.revature.security.JwtTokenUtil;
 import com.revature.services.AuthService;
 import jakarta.servlet.http.HttpSession;
+import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -23,11 +25,18 @@ public class AuthController {
     private final AuthService authService;
 
     //we also need to autowire the JWTTokenUtil and the AuthManager
+    private final JwtTokenUtil jwtTokenUtil;
+    private final AuthenticationManager authenticationManager;
 
     @Autowired
-    public AuthController(AuthService authService) {
+    public AuthController(AuthService authService, JwtTokenUtil jwtTokenUtil, AuthenticationManager authenticationManager) {
         this.authService = authService;
+        this.jwtTokenUtil = jwtTokenUtil;
+        this.authenticationManager = authenticationManager;
     }
+
+
+
 
     //Insert a new user (POST request)
     @PostMapping("/register") //Requests ending in /auth/register will invoke this method
@@ -44,7 +53,7 @@ public class AuthController {
 
     //Login (POST request)
     @PostMapping("/login")
-    public ResponseEntity<OutgoingUserDTO> login(@RequestBody LoginDTO loginDTO, AuthenticationManager authManager){
+    public ResponseEntity<OutgoingUserDTO> login(@RequestBody LoginDTO loginDTO){
         //NOTE: No more explicit session handling, and no more talking ot the service layer
 
 
@@ -59,9 +68,20 @@ public class AuthController {
             User loggedInUser = (User) auth.getPrincipal();
 
             //finally, generate a JWT! The user will use this in subsequent requests
-            String jwt = jwtTokenUtil
+            String jwt = jwtTokenUtil.generateAccessToken(loggedInUser);
 
+            //send the JWT back with the user info
+            return ResponseEntity.ok().body(
+                    //TODO: make constructor that takes User + JWT
+                    new OutgoingUserDTO(loggedInUser.getUserId()
+                            , loggedInUser.getUsername()
+                            , loggedInUser.getRole()
+                            , jwt)
+            );
 
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
         }
 
 

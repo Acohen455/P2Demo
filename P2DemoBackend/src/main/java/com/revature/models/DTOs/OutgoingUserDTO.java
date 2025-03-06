@@ -16,6 +16,9 @@ public class OutgoingUserDTO {
     private String username;
     private String role;
 
+    //this will be used to transmit JWT info
+    private String jwt;
+
     //boilerplate----------------------
 
 
@@ -34,6 +37,15 @@ public class OutgoingUserDTO {
         this.userId = u.getUserId();
         this.username = u.getUsername();
         this.role = u.getRole();
+    }
+
+
+    //sends constructor after login (sends the JWT)
+    public OutgoingUserDTO(UUID userId, String username, String role, String jwt) {
+        this.userId = userId;
+        this.username = username;
+        this.role = role;
+        this.jwt = jwt;
     }
 
     public UUID getUserId() {
@@ -58,6 +70,14 @@ public class OutgoingUserDTO {
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    public String getJwt() {
+        return jwt;
+    }
+
+    public void setJwt(String jwt) {
+        this.jwt = jwt;
     }
 
     @Override

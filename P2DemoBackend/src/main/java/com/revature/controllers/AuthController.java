@@ -6,6 +6,7 @@ import com.revature.models.User;
 import com.revature.security.JwtTokenUtil;
 import com.revature.services.AuthService;
 import jakarta.servlet.http.HttpSession;
+import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -52,14 +53,14 @@ public class AuthController {
 
     //Login (POST request)
     @PostMapping("/login")
-    public ResponseEntity<OutgoingUserDTO> login(@RequestBody LoginDTO loginDTO, AuthenticationManager authManager){
+    public ResponseEntity<OutgoingUserDTO> login(@RequestBody LoginDTO loginDTO){
         //NOTE: No more explicit session handling, and no more talking ot the service layer
 
 
         //attempt to log in
         try {
             //The authenticationmanager from spring security is now in charge of username/password checks
-            Authentication auth = authManager.authenticate(
+            Authentication auth = authenticationManager.authenticate(
               new UsernamePasswordAuthenticationToken(loginDTO.getUsername(), loginDTO.getPassword())
             );
 
@@ -67,9 +68,20 @@ public class AuthController {
             User loggedInUser = (User) auth.getPrincipal();
 
             //finally, generate a JWT! The user will use this in subsequent requests
-            String jwt = jwtTokenUtil
+            String jwt = jwtTokenUtil.generateAccessToken(loggedInUser);
 
+            //send the JWT back with the user info
+            return ResponseEntity.ok().body(
+                    //TODO: make constructor that takes User + JWT
+                    new OutgoingUserDTO(loggedInUser.getUserId()
+                            , loggedInUser.getUsername()
+                            , loggedInUser.getRole()
+                            , jwt)
+            );
 
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
         }
 
 
